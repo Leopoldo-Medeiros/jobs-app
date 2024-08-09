@@ -3,87 +3,73 @@
         Edit Job: {{ $job->title }}
     </x-slot:heading>
 
-    <form method="POST" action="/jobs/{{ $job->id }}">
-        @csrf
-        @method('PUT')
+    <div class="max-w-lg mx-auto mt-8">
+        <form method="POST" action="/jobs/{{ $job->id }}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            @csrf
+            @method('PUT')
 
-        <div class="space-y-12">
-            <div class="border-b border-gray-900/10 pb-12">
-                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div class="sm:col-span-4">
-                        <label for="title" class="block text-sm leading-6 text-gray-900 font-semibold">Title</label>
-                        <div class="mt-2">
-                            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                <input
-                                    type="text"
-                                    name="title"
-                                    id="title"
-                                    autocomplete="title"
-                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                    placeholder="Software Engineer"
-                                    value="{{ $job->title }}"
-                                    required>
-                            </div>
+            <!-- Display validation errors -->
+            @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <strong class="font-bold">Whoops!</strong>
+                    <span class="block sm:inline">There were some problems with your input.</span>
+                    <ul class="mt-2">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-                            @error('title')
-                            <p class="text-xs text-red-500 font-semibold mt-1">{{ $message }}</p>
-                            @enderror
+            <div class="mb-4">
+                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Job Title:</label>
+                <input type="text" name="title" id="title" required
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       value="{{ $job->title }}">
+            </div>
 
-                        </div>
-                    </div>
-                    <div class="sm:col-span-4">
-                        <label for="salary" class="block text-sm leading-6 text-gray-900 font-semibold">Salary</label>
-                        <div class="mt-2">
-                            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                <input
-                                    type="text"
-                                    name="salary"
-                                    id="salary"
-                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                    placeholder="$50,000 Per Year"
-                                    value="{{ $job->salary }}"
-                                    required>
-                            </div>
+            <div class="mb-4">
+                <label for="salary" class="block text-gray-700 text-sm font-bold mb-2">Salary:</label>
+                <input type="text" name="salary" id="salary" required
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       value="{{ $job->salary }}">
+            </div>
 
-                            @error('salary')
-                                <p class="text-xs text-red-500 font-semibold mt-1">{{ $message }}</p>
-                            @enderror
+            <div class="mb-4">
+                <label for="company_name" class="block text-gray-700 text-sm font-bold mb-2">Company Name:</label>
+                <input type="text" name="company_name" id="company_name" required
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       value="{{ $job->company_name }}">
+            </div>
 
-                        </div>
-                    </div>
+            <div class="mb-4">
+                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+                <textarea name="description" id="description" required
+                          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">{{ $job->description }}</textarea>
+            </div>
 
-                    <div class="col-span-full">
-                        <label for="about" class="block text-sm font-semibold leading-6 text-gray-900">About</label>
-                        <div class="mt-2">
-                            <textarea id="about" name="about" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
-                        </div>
-                        <p class="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about yourself.</p>
-                    </div>
+            <div class="mt-6 flex items-center justify-between gap-x-6">
+                <div class="flex items-center">
+                    <button type="button" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this job?')) { document.getElementById('delete-form').submit(); }" class="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        Delete
+                    </button>
+                </div>
 
+                <div class="flex items-center justify-end gap-x-6">
+                    <a href="/jobs/{{$job->id}}" class="text-sm font-semibold leading-6 text-gray-900">Cancel</a>
+                    <button type="submit"
+                            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        Update
+                    </button>
                 </div>
             </div>
+        </form>
 
-        </div>
-
-        <div class="mt-6 flex items-center justify-between gap-x-6">
-            <!-- Aligning the button -->
-            <div class="flex items-center">
-                <button form=delete-form class="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    Delete
-                </button>
-            </div>
-
-            <div class="flex items-center justify-end gap-x-6">
-                <a href="/jobs/{{$job->id}}" class="text-sm font-semibold leading-6 text-gray-900">Cancel</a>
-                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Update</button>
-            </div>
-        </div>
-    </form>
-
-    <form method="POST" action="/jobs/{{ $job->id }}" id="delete-form" class="hidden">
-        @csrf
-        @method('DELETE')
-    </form>
+        <form method="POST" action="{{ route('jobs.destroy', $job) }}" id="delete-form" class="hidden">
+            @csrf
+            @method('DELETE')
+        </form>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js"></script>
     <script>
@@ -94,5 +80,4 @@
             this.value = accounting.formatMoney(value, '$', 0);
         });
     </script>
-
 </x-layout>

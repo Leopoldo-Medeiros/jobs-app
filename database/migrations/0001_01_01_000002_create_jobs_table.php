@@ -4,29 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateJobsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); // Job title
-            $table->text('description'); // Job description
-            $table->decimal('salary', 10, 2); // Salary for the job
-            $table->string('company_name'); // Name of the company
-            $table->string('location')->nullable(); // Job location
-            $table->timestamps(); // Created and updated timestamps
+            $table->string('title');
+            $table->text('description');
+            $table->decimal('salary', 10, 2);
+            $table->string('company_name')->nullable();
+            $table->string('location')->nullable();
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('jobs');
     }
-};
+}
+

@@ -1,13 +1,22 @@
 <?php
 
-namespace App\Models;
+namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Job;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-class Job extends Model
+class JobFactory extends Factory
 {
-    use HasFactory;
+    protected $model = Job::class;
 
-    protected $fillable = ['title', 'employer_id', 'salary', 'description'];
+    public function definition()
+    {
+        return [
+            'title' => $this->faker->jobTitle(),
+            'salary' => $this->faker->numberBetween(30000, 120000),
+            'description' => $this->faker->paragraph(),
+            'company_name' => $this->faker->company(),
+            // Add other fields as needed
+        ];
+    }
 }
