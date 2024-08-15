@@ -12,7 +12,7 @@
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 mt-[-50px]">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Register your account
+                        Sign in to your account
                     </h1>
                     <form method="POST" action="/jobs" class="space-y-4 md:space-y-6">
                         @csrf
@@ -33,24 +33,6 @@
                         <div class="space-y-12">
                             <div class="mb-4">
                                 <x-form-field>
-                                    <x-form-label for="first_name" textColor="dark:text-white">First Name</x-form-label>
-                                    <div class="mt-2">
-                                        <x-form-input name="first_name" id="first_name" type="first_name" required />
-                                        <x-form-error name="first_name" />
-                                    </div>
-                                </x-form-field>
-                            </div>
-                            <div class="mb-4">
-                                <x-form-field>
-                                    <x-form-label for="last_name" textColor="dark:text-white">Last Name</x-form-label>
-                                    <div class="mt-2">
-                                        <x-form-input name="last_name" id="last_name" type="last_name" required />
-                                        <x-form-error name="last_name" />
-                                    </div>
-                                </x-form-field>
-                            </div>
-                            <div class="mb-4">
-                                <x-form-field>
                                     <x-form-label for="email" textColor="dark:text-white">Email</x-form-label>
                                     <div class="mt-2">
                                         <x-form-input name="email" id="email" type="email" required />
@@ -67,15 +49,7 @@
                                     </div>
                                 </x-form-field>
                             </div>
-                            <div class="mb-4">
-                                <x-form-field>
-                                    <x-form-label for="confirm_password" textColor="dark:text-white">Confirm Password</x-form-label>
-                                    <div class="mt-2">
-                                        <x-form-input name="confirm_password" id="confirm_password" type="confirm_password" required />
-                                        <x-form-error name="confirm_password" />
-                                    </div>
-                                </x-form-field>
-                            </div>
+
                             <div class="flex items-center justify-between">
                                 <div class="flex items-start">
                                     <div class="flex items-center h-5">
@@ -88,10 +62,10 @@
                                 <a href="#" class="text-sm font-medium dark:text-white hover:underline">Forgot password?</a>
                             </div>
 
-                            <x-form-button>Register</x-form-button>
+                            <x-form-button>Log In</x-form-button>
 
                             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Do you have an account already? <a href="../login" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Log In</a>
+                                Don’t have an account yet? <a href="../register" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Register</a>
                             </p>
                         </div>
                     </form>
