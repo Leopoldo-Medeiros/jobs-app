@@ -25,6 +25,7 @@
                     </div>
                 </div>
                 <div class="hidden md:block">
+                    // The code below is checking if the user is a guest, if they are, it will display the Log In and Register links
                     <div class="ml-4 flex items-center md:ml-6">
                         @guest
                             <x-nav-link href="/login" :active="request()->is('login')">Log In</x-nav-link>
