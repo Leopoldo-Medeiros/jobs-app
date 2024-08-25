@@ -1,5 +1,6 @@
 <?php
 
+// resource: database/migrations/2024_08_19_000000_create_job_tag_table.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -10,12 +11,9 @@ class CreateJobTagTable extends Migration
     {
         Schema::create('job_tag', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('job_listing_id');
-            $table->unsignedBigInteger('tag_id');
+            $table->foreignId('job_listing_id')->constrained('job_listings')->onDelete('cascade');
+            $table->foreignId('tag_id')->constrained('tags')->onDelete('cascade');
             $table->timestamps();
-
-            $table->foreign('job_listing_id')->references('id')->on('job_listings')->onDelete('cascade');
-            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
 

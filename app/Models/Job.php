@@ -1,5 +1,6 @@
 <?php
 
+// resource: app/Models/Job.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,10 +12,9 @@ class Job extends Model
 
     protected $fillable = [
         'title',
-        'description',
         'salary',
+        'description',
         'company_name',
-        'location',
     ];
 
     public function tags()
