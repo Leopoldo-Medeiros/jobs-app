@@ -14,28 +14,15 @@
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Sign in to your account
                     </h1>
-                    <form method="POST" action="/jobs" class="space-y-4 md:space-y-6">
+                    <form method="POST" action="/login" class="space-y-4 md:space-y-6">
                         @csrf
-
-                        <!-- Display validation errors -->
-                        @if ($errors->any())
-                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                                <strong class="font-bold">Whoops!</strong>
-                                <span class="block sm:inline">There were some problems with your input.</span>
-                                <ul class="mt-2">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
+                        
                         <div class="space-y-12">
                             <div class="mb-4">
                                 <x-form-field>
                                     <x-form-label for="email" textColor="dark:text-white">Email</x-form-label>
                                     <div class="mt-2">
-                                        <x-form-input name="email" id="email" type="email" required />
+                                        <x-form-input name="email" id="email" type="email" :value="old('email')" required />
                                         <x-form-error name="email" />
                                     </div>
                                 </x-form-field>

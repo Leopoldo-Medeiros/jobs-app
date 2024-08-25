@@ -1,102 +1,73 @@
 <x-layout>
     <x-slot:heading>
-        Log In
+        Register
     </x-slot:heading>
 
-    <section class="bg-white-100">
-        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-gray">
-                <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-                JOBS
-            </a>
-            <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 mt-[-50px]">
-                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Register your account
-                    </h1>
-                    <form method="POST" action="/jobs" class="space-y-4 md:space-y-6">
-                        @csrf
-
-                        <!-- Display validation errors -->
-                        @if ($errors->any())
-                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                                <strong class="font-bold">Whoops!</strong>
-                                <span class="block sm:inline">There were some problems with your input.</span>
-                                <ul class="mt-2">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        <div class="space-y-12">
-                            <div class="mb-4">
-                                <x-form-field>
-                                    <x-form-label for="first_name" textColor="dark:text-white">First Name</x-form-label>
-                                    <div class="mt-2">
-                                        <x-form-input name="first_name" id="first_name" type="first_name" required />
-                                        <x-form-error name="first_name" />
-                                    </div>
-                                </x-form-field>
-                            </div>
-                            <div class="mb-4">
-                                <x-form-field>
-                                    <x-form-label for="last_name" textColor="dark:text-white">Last Name</x-form-label>
-                                    <div class="mt-2">
-                                        <x-form-input name="last_name" id="last_name" type="last_name" required />
-                                        <x-form-error name="last_name" />
-                                    </div>
-                                </x-form-field>
-                            </div>
-                            <div class="mb-4">
-                                <x-form-field>
-                                    <x-form-label for="email" textColor="dark:text-white">Email</x-form-label>
-                                    <div class="mt-2">
-                                        <x-form-input name="email" id="email" type="email" required />
-                                        <x-form-error name="email" />
-                                    </div>
-                                </x-form-field>
-                            </div>
-                            <div class="mb-4">
-                                <x-form-field>
-                                    <x-form-label for="password" textColor="dark:text-white">Password</x-form-label>
-                                    <div class="mt-2">
-                                        <x-form-input name="password" id="password" type="password" required />
-                                        <x-form-error name="password" />
-                                    </div>
-                                </x-form-field>
-                            </div>
-                            <div class="mb-4">
-                                <x-form-field>
-                                    <x-form-label for="confirm_password" textColor="dark:text-white">Confirm Password</x-form-label>
-                                    <div class="mt-2">
-                                        <x-form-input name="confirm_password" id="confirm_password" type="confirm_password" required />
-                                        <x-form-error name="confirm_password" />
-                                    </div>
-                                </x-form-field>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-start">
-                                    <div class="flex items-center h-5">
-                                        <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800">
-                                    </div>
-                                    <div class="ml-3 text-sm">
-                                        <label for="remember" class="text-gray-500 dark:text-white">Remember me</label>
-                                    </div>
-                                </div>
-                                <a href="#" class="text-sm font-medium dark:text-white hover:underline">Forgot password?</a>
-                            </div>
-
-                            <x-form-button>Register</x-form-button>
-
-                            <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Do you have an account already? <a href="../login" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Log In</a>
-                            </p>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+            <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
+            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Create your account</h2>
         </div>
-    </section>
+
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+
+                <!-- First Name -->
+                <div>
+                    <label for="first_name" class="block text-sm font-medium leading-6 text-gray-900">First Name</label>
+                    <div class="mt-2">
+                        <input id="first_name" name="first_name" type="text" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <x-form-error name="first_name" />
+                    </div>
+                </div>
+
+                <!-- Last Name -->
+                <div>
+                    <label for="last_name" class="block text-sm font-medium leading-6 text-gray-900">Last Name</label>
+                    <div class="mt-2">
+                        <input id="last_name" name="last_name" type="text" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <x-form-error name="last_name" />
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                    <div class="mt-2">
+                        <input id="email" name="email" type="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <x-form-error name="email" />
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                    <div class="mt-2">
+                        <input id="password" name="password" type="password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <x-form-error name="password" />
+                    </div>
+                </div>
+
+                <!-- Confirm Password -->
+                <div>
+                    <label for="password_confirmation" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
+                    <div class="mt-2">
+                        <input id="password_confirmation" name="password_confirmation" type="password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <x-form-error name="password_confirmation" />
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Register</button>
+                </div>
+            </form>
+
+            <p class="mt-10 text-center text-sm text-gray-500">
+                Already have an account?
+                <a href="../login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Log In</a>
+            </p>
+        </div>
+    </div>
 </x-layout>
